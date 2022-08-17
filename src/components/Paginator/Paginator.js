@@ -1,5 +1,6 @@
 import { View, StyleSheet, Animated, useWindowDimensions } from 'react-native';
 import React from 'react';
+import uuid from 'react-native-uuid';
 
 const Paginator = ({ data, scrollX }) => {
   const { width } = useWindowDimensions();
@@ -30,7 +31,7 @@ const Paginator = ({ data, scrollX }) => {
         return (
           <Animated.View
             style={[styles.dot, { width: dotWidth, backgroundColor: bgColor }]}
-            key={i}
+            key={uuid.v4()}
           />
         );
       })}

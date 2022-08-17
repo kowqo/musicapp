@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, SafeAreaView, Animated } from 'react-native';
+import GrayButton from '../components/GrayButton/GrayButton';
 import Paginator from '../components/Paginator/Paginator';
 import data from '../utils/data';
+import uuid from 'react-native-uuid';
 
 const { width } = Dimensions.get('window');
 
@@ -10,7 +12,12 @@ const blockPaddings = (width - blockWidth) / 2;
 const blockPadding = 10;
 
 const Wtf = () => {
+  let opacity = 0;
   const scrollX = React.useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    opacity = scrollX > 500 ? 1 : 0;
+  }, [scrollX]);
+
   return (
     <SafeAreaView style={styles.container}>
       <Animated.FlatList
@@ -30,7 +37,7 @@ const Wtf = () => {
         pagingEnabled
         scrollEventThrottle={16}
         data={data}
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item.id}
         renderItem={({ item, index }) => {
           const inputRange = [
             (index - 1) * blockWidth,
@@ -65,6 +72,7 @@ const Wtf = () => {
         }}
       />
       <Paginator data={data} scrollX={scrollX} />
+      <GrayButton opacity={opacity} text="Continue to the app" />
     </SafeAreaView>
   );
 };
