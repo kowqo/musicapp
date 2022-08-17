@@ -1,15 +1,17 @@
-import { StyleSheet, Text, Button, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 import React from 'react';
 import { black, white } from '../../styles/COLORS';
+import Arrows from '../../assets/screens/arrows.svg';
 
-const GrayButton = ({ text, opacity = 0 }) => {
+const GrayButton = ({ text, opacity = 1, onPress }) => {
   return (
-    <TouchableOpacity style={[styles.button, { opacity }]} title={text}>
+    <Pressable style={[styles.button, { opacity }]} title={text} onPress={onPress}>
       <Text style={styles.text}>
         {text}
-        {'     '}>>
+        {'     '}
+        <Arrows style={styles.svg} width={12} height={12} />
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -29,5 +31,8 @@ const styles = StyleSheet.create({
   },
   text: {
     color: white,
+  },
+  svg: {
+    alignmentBaseline: 'center',
   },
 });

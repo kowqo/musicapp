@@ -6,15 +6,7 @@ const Paginator = ({ data, scrollX }) => {
   const { width } = useWindowDimensions();
   const blockWidth = width * 0.87;
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        height: 64,
-        justifyContent: 'center',
-        position: 'absolute',
-        left: 390 / 3.6,
-        top: 587,
-      }}>
+    <View style={styles.container}>
       {data.map((_, i) => {
         const inputRange = [(i - 1) * blockWidth, i * blockWidth, (i + 1) * blockWidth];
 
@@ -45,6 +37,10 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     height: 64,
+    justifyContent: 'center',
+    position: 'absolute',
+    left: 390 / 3.6,
+    top: 587,
   },
   dot: {
     height: 5,

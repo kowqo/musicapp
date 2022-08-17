@@ -1,48 +1,45 @@
-import { View, Text, StyleSheet, Image, useWindowDimensions, Animated } from 'react-native';
+import { View, Text, StyleSheet, Image, Animated } from 'react-native';
 import React from 'react';
 
-const FlatListItem = ({ item, index, scrollX }) => {
-  const { width } = useWindowDimensions();
-  const blockWidth = width * 0.87;
+const FlatListItem = ({ item, index, blockWidth, blockPadding, scrollX }) => {
   const inputRange = [(index - 1) * blockWidth, index * blockWidth, (index + 1) * blockWidth];
 
   const scrollY = scrollX.interpolate({
     inputRange,
-    outputRange: [0, -50, 0],
+    outputRange: [0.9, 1, 0.9],
   });
   return (
-    <Animated.View style={[styles.container, { blockWidth, transform: [{ translateY: scrollY }] }]}>
-      <Image source={item.image} style={[styles.image]} />
-      <View style={styles.view}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.description}>{item.description}</Text>
-      </View>
-    </Animated.View>
+    <View style={{ width: blockWidth }}>
+      <Animated.View
+        style={{
+          marginHorizontal: blockPadding - 10,
+          padding: blockPadding,
+          borderRadius: 34,
+          backgroundColor: '#fff',
+          alignItems: 'center',
+          transform: [{ scaleY: scrollY }],
+        }}>
+        <Image source={item.image} style={[styles.posterImage, { height: blockWidth * 1.2 }]} />
+        <View style={styles.view}>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.description}>{item.description}</Text>
+        </View>
+      </Animated.View>
+    </View>
   );
 };
 
 export default FlatListItem;
 
 const styles = StyleSheet.create({
-  container: {
-    width: 390,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 10,
-  },
-  image: {
-    height: 420,
+  posterImage: {
     width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 60,
+    resizeMode: 'cover',
+    borderRadius: 24,
     margin: 0,
-  },
-  view: {
-    flex: 0.3,
+    marginBottom: 50,
   },
   title: {
-    marginTop: 56,
     fontSize: 19,
     fontWeight: '700',
     marginBottom: 20,

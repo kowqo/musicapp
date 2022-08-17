@@ -13,8 +13,10 @@ module.exports = {
     'object-curly-newline': 'off',
     'arrow-body-style': 0,
     'no-use-before-define': 0,
-    'react/prop-types': 0,
+    'react/prop-types': 1,
     'global-require': 0,
     'react/jsx-props-no-spreading': 0,
+    'react/jsx-indent': 0,
+    'react/jsx-closing-bracket-location': 0,
   },
 };
